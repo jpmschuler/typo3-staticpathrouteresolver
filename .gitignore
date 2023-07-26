@@ -1,0 +1,48 @@
+###################
+# project specific
+###################
+# OS
+###################
+.scannerwork
+.DS_Store
+.DS_Store?
+._*
+.project
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+###################
+# build tools
+###################
+/node_modules
+/vendor
+/typo3
+/.Build
+/target
+/.sonar
+###################
+# IntelliJ
+###################
+/.idea
+####
+# ddev
+####
+/composer.lock
+/var/
+/*.cache
+/Tests/Output
+/*deprecations*.xml
+/*report*.xml
+/.editorconfig
+/.php_cs.php
+/.php-cs-fixer.cache
+/.phpstan.constants.php
+/phpstan.neon
+/rector.*.php
+/typoscript-lint.yml
+/report.*
+/.deploy.sh
+/.ddev
+/tvplus-contentslide*
+/tvplus_contentslide*

@@ -1,0 +1,138 @@
+{
+	"name": "jpmschuler/staticpathrouteresolver",
+	"description": "Site config static routes which support EXT: path prefix to e.g. allow per-site favicon with cms-composer-installers >=4",
+	"license": [
+		"GPL-2.0+"
+	],
+	"type": "typo3-cms-extension",
+	"authors": [
+		{
+			"name": "J. Peter M. Schuler",
+			"email": "j.peter.m.schuler@uni-due.de",
+			"role": "Developer"
+		}
+	],
+	"require": {
+		"php": "^7.4 || ^8.0",
+		"typo3/cms-backend": "^v11.5.10",
+		"typo3/cms-core": "^v11.5.10",
+		"typo3/cms-frontend": "^v11.5.10"
+	},
+	"require-dev": {
+		"ergebnis/composer-normalize": "^2.19.0",
+		"friendsofphp/php-cs-fixer": "^3.4.0",
+		"helmich/typo3-typoscript-lint": "^3.1.0",
+		"jangregor/phpstan-prophecy": "^1.0.0",
+		"phpstan/extension-installer": "^1.1.0",
+		"phpstan/phpstan": "^1.6.2",
+		"roave/security-advisories": "dev-latest",
+		"saschaegerer/phpstan-typo3": "^1.1.2",
+		"seld/jsonlint": "^1.9.0",
+		"seregazhuk/php-watcher": "dev-master",
+		"squizlabs/php_codesniffer": "^3.6.2",
+		"ssch/typo3-rector": "^1",
+		"typo3/tailor": "^1.5"
+	},
+	"autoload": {
+		"psr-4": {
+			"Jpmschuler\\StaticPathRouteResolver\\": "Classes/"
+		}
+	},
+	"config": {
+		"allow-plugins": {
+			"typo3/class-alias-loader": true,
+			"typo3/cms-composer-installers": true,
+			"bk2k/configuration-installer": true,
+			"ergebnis/composer-normalize": true,
+			"phpstan/extension-installer": true
+		},
+		"bin-dir": ".Build/bin",
+		"sort-packages": true,
+		"vendor-dir": ".Build/vendor"
+	},
+	"extra": {
+		"typo3/cms": {
+			"app-dir": ".Build",
+			"extension-key": "staticpathrouteresolver",
+			"updateLanguages": false,
+			"web-dir": ".Build/public"
+		}
+	},
+	"scripts": {
+		"codequality": [
+			"@lint:php-cs-fixer",
+			"@lint:all",
+			"@rector:dry-run"
+		],
+		"codequality:autofix": [
+			"@lint:php-cs-fixer",
+			"@lint:phpcbf",
+			"@rector"
+		],
+		"develop": [
+			"Composer\\Config::disableProcessTimeout",
+			".Build/bin/php-watcher foo --exec 'composer run develop:deploy' --signal SIGTERM --ignore .Build --ext=php,yaml,html,txt,typoscript,css,js,xlf"
+		],
+		"develop:deploy": "[ -f ./.deploy.sh ] && ./.deploy.sh",
+		"git:precommit": [
+			"echo 'running precommit checks...'",
+			"@lint:php:onlyerrors",
+			"@lint:php-cs-fixer:dry-run:onlyerrors",
+			"@lint:phpcs:dry-run:onlyerrors",
+			"@lint:phpcpd:onlyerrors"
+		],
+		"lint:all": [
+			"@lint:php",
+			"@lint:php-cs-fixer:dry-run",
+			"@lint:phpcs:dry-run",
+			"@lint:phpstan"
+		],
+		"lint:php": "find *.php Classes Configuration Tests -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l",
+		"lint:php-cs-fixer": "php-cs-fixer fix",
+		"lint:php-cs-fixer:dry-run": "php-cs-fixer fix --dry-run --using-cache=no --diff",
+		"lint:php-cs-fixer:dry-run:onlyerrors": "php-cs-fixer fix --dry-run --using-cache=no --diff > /dev/null",
+		"lint:php:onlyerrors": "find *.php Classes -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l > /dev/null",
+		"lint:phpcbf": "phpcbf Classes",
+		"lint:phpcs": "@lint:phpcbf",
+		"lint:phpcs:dry-run": "phpcs Classes",
+		"lint:phpcs:dry-run:onlyerrors": "phpcs -n Classes",
+		"lint:phpstan": "phpstan --level=5 --memory-limit=1G analyse",
+		"lint:phpstan:baseline": "phpstan --level=5 --memory-limit=1G analyse --generate-baseline",
+		"lint:phpstan:ci": "phpstan --level=5 --memory-limit=1G --no-progress analyse",
+		"lint:typoscript": "typoscript-lint",
+		"post-update": "@post-install",
+		"prepare-release": [
+			"rm .gitignore",
+			"rm -rf .Build",
+			"rm -rf .ddev",
+			"rm -rf .github",
+			"rm -rf .gitlab",
+			"rm -rf Tests",
+			"rm -rf tools",
+			"rm .editorconfig",
+			"rm .gitattributes",
+			"rm .php-cs-fixer.php",
+			"rm .phpcs.xml",
+			"rm phpstan.neon",
+			"rm .phpcs.xml",
+			"rm GitVersion.yml",
+			"rm rector.php",
+			"rm typoscript-lint.php"
+		],
+		"rector": [
+			"rector process --config=rector.php . ",
+			"@lint:php-cs-fixer"
+		],
+		"rector:dry-run": "rector process --config=rector.php --dry-run --  .",
+		"rector:dry-run:ci": "rector process --config=rector.php --dry-run --output-format json -- . > report.rector.json",
+		"rector:force": "rector process .",
+		"test": [
+			"@lint:php-cs-fixer"
+		],
+		"version:set": [
+			"@putenv TYPO3_DISABLE_DOCS_VERSION_UPDATE=1",
+			"@version:set:ext_emconf.php"
+		],
+		"version:set:ext_emconf.php": "tailor set-version"
+	}
+}
