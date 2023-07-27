@@ -38,7 +38,6 @@ Thumbs.db
 /.php_cs.php
 /.php-cs-fixer.cache
 /.phpstan.constants.php
-/phpstan.neon
 /rector.*.php
 /typoscript-lint.yml
 /report.*
