@@ -113,11 +113,11 @@
 			"rm .gitattributes",
 			"rm .php-cs-fixer.php",
 			"rm .phpcs.xml",
-			"rm phpstan.neon",
+      "rm phpstan.neon",
+      "rm phpstan-baseline.neon",
 			"rm .phpcs.xml",
 			"rm GitVersion.yml",
-			"rm rector.php",
-			"rm typoscript-lint.php"
+			"rm rector.php"
 		],
 		"rector": [
 			"rector process --config=rector.php . ",

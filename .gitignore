@@ -34,7 +34,6 @@ Thumbs.db
 /Tests/Output
 /*deprecations*.xml
 /*report*.xml
-/.editorconfig
 /.php_cs.php
 /.php-cs-fixer.cache
 /.phpstan.constants.php
