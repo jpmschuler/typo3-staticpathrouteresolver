@@ -8,10 +8,13 @@
 [![Current CI health](https://github.com/jpmschuler/typo3-staticpathrouteresolver/actions/workflows/ci.yml/badge.svg)](https://github.com/jpmschuler/typo3-staticpathrouteresolver/actions/workflows/ci.yml)
 
 # EXT:staticpathrouteresolver
-Site config static routes which support EXT: path prefix to e.g. allow per-site favicon with cms-composer-installers >=4
+Site config static routes which support EXT: path prefix to e.g. allow per-site redirect of `/favicon.ico` with
+* TYPO3 11 LTS using `typo3/cms-composer-installers` `v4.0.0RC1` or with
 
 # Installation
-Either install `EXT:staticpathrouteresolver` via TER (Extension Manager) or via composer `jpmschuler/staticpathrouteresolver`
+Either install
+* via composer using `composer req jpmschuler/staticpathrouteresolver`
+* via TER (Extension Manager) [`EXT:staticpathrouteresolver`](https://extensions.typo3.org/extension/staticpathrouteresolver)
 
 # How to use
 
@@ -23,3 +26,10 @@ routes:
     path: 'EXT:mysitepackage/Resources/Public/Icons/favicon.ico'
 ```
 The core handler will ignore all routes without a specified type, we use that to not let core throw exceptions or interact on that config.
+
+
+|                 | URL                                                                |
+|-----------------|--------------------------------------------------------------------|
+| **Repository:** | https://github.com/jpmschuler/typo3-staticpathrouteresolver               |
+| **TER:**        | https://extensions.typo3.org/extension/staticpathrouteresolver           |
+| **Packagist:**  | https://packagist.org/packages/jpmschuler/staticpathrouteresolver  |
