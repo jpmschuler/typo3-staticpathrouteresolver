@@ -14,6 +14,7 @@ use TYPO3\CMS\Core\Http\Response;
 use TYPO3\CMS\Core\LinkHandling\LinkService;
 use TYPO3\CMS\Core\Routing\InvalidRouteArgumentsException;
 use TYPO3\CMS\Core\Site\Entity\Site;
+use TYPO3\CMS\Core\Type\File\FileInfo;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 
 class StaticPathRouteResolver implements MiddlewareInterface
@@ -97,7 +98,9 @@ class StaticPathRouteResolver implements MiddlewareInterface
     {
         $file = ExtensionManagementUtility::resolvePackagePath($filenameWithExtPrefix);
         $content = file_get_contents($file);
-        $contentType = mime_content_type($file);
+        $fileInfo = new FileInfo($file);
+        $contentType = $fileInfo->getMimeType();
+
         return [$content, $contentType];
     }
 
