@@ -3,7 +3,7 @@ name: TERUpload
 on:
   push:
     tags:
-      - "**"
+      - v*
 
 jobs:
   TERUpload:
