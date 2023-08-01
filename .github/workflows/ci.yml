@@ -103,6 +103,7 @@ jobs:
         with:
           args: --ignore-platform-req=ext-gd --ignore-platform-req=ext-pcntl --ignore-platform-req=ext-zip
           php_version: "8.1"
+          token: ${{ secrets.PAT }}
       - name: "Create new tag, updating optional version files"
         run: |
           export GIT_LASTTAG="$(git describe --tags --abbrev=0)"
