@@ -13,10 +13,9 @@
 		}
 	],
 	"require": {
-		"php": "^7.4 || ^8.0",
-		"typo3/cms-backend": "^v11.5.10",
-		"typo3/cms-core": "^v11.5.10",
-		"typo3/cms-frontend": "^v11.5.10"
+		"typo3/cms-backend": "^v11.5.10 || ^v12.4.0",
+		"typo3/cms-core": "^v11.5.10 || ^v12.4.0",
+		"typo3/cms-frontend": "^v11.5.10 || ^v12.4.0"
 	},
 	"require-dev": {
 		"ergebnis/composer-normalize": "^2.19.0",
@@ -28,7 +27,6 @@
 		"roave/security-advisories": "dev-latest",
 		"saschaegerer/phpstan-typo3": "^1.1.2",
 		"seld/jsonlint": "^1.9.0",
-		"seregazhuk/php-watcher": "dev-master",
 		"squizlabs/php_codesniffer": "^3.6.2",
 		"ssch/typo3-rector": "^1",
 		"typo3/tailor": "^1.5"
