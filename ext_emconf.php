@@ -3,7 +3,7 @@ $EM_CONF[$_EXTKEY] = [
     'title' => 'TYPO3 StaticPathRouteResolver',
     'description' => 'Site config static routes which support EXT: path prefix to e.g. allow per-site favicon with cms-composer-installers >=4',
     'category' => 'plugin',
-    'version' => '1.2.2',
+    'version' => '1.2.3',
     'state' => 'stable',
     'author' => 'Schuler, J. Peter M.',
     'author_email' => 'j.peter.m.schuler@uni-due.de',
