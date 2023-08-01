@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns:t3="http://typo3.org/schemas/xliff" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+	<file source-language="en" target-language="de" original="" datatype="plaintext" date="2023-08-01T13:33:35+02:00">
+		<body>
+			<trans-unit id="site_route.path" resname="site_route.path">
+				<source>Path</source>
+				<target>Pfad</target>
+			</trans-unit>
+			<trans-unit id="site_route.path.description" resname="site_route.path.description">
+				<source>A path to a file inside the Resources/Public resource folder of an extension, starting with &#39;EXT:&#39;</source>
+				<target>Ein Pfad zu einer Datei im Resources/Public-Ordner einer Extension, beginnt mit &#39;EXT:&#39;</target>
+			</trans-unit>
+			<trans-unit id="site_route.path.placeholder" resname="site_route.path.placeholder">
+				<source>EXT:mysitepackage/Resources/Public/robots.txt</source>
+				<target>EXT:mysitepackage/Resources/Public/robots.txt</target>
+			</trans-unit>
+			<trans-unit id="site_route.type.extpath" resname="site_route.type.extpath">
+				<source>File from extension</source>
+				<target>Datei aus Extension</target>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>
