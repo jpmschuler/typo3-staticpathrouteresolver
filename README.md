@@ -8,8 +8,9 @@
 [![Current CI health](https://github.com/jpmschuler/typo3-staticpathrouteresolver/actions/workflows/ci.yml/badge.svg)](https://github.com/jpmschuler/typo3-staticpathrouteresolver/actions/workflows/ci.yml)
 
 # EXT:staticpathrouteresolver
-Site config static routes which support EXT: path prefix to e.g. allow per-site redirect of `/favicon.ico` with
-* TYPO3 11 LTS using `typo3/cms-composer-installers` `v4.0.0RC1` or with
+Site config static routes which support EXT: path prefix to e.g. allow per-site redirect of `/favicon.ico` or `/robots.txt` with
+* TYPO3 11LTS using `typo3/cms-composer-installers` `v4.0.0RC1` or with
+* TYPO3 12LTS
 
 # Installation
 Either install
@@ -18,7 +19,7 @@ Either install
 
 # How to use
 
-Inside your site config, use
+Either configure the static routes in the site backend module or in your site `config.yml`, use
 ```
 routes:
   -
