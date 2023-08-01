@@ -68,6 +68,7 @@ jobs:
     name: "calculating next SemVer"
     runs-on: ubuntu-22.04
     needs: [ php-lint,php-codequality ]
+    if: github.ref == 'refs/heads/main'
     outputs:
       majorMinorPatch: ${{ steps.gitversion.outputs.majorMinorPatch }} # To use an output in another job, you have to map it to a job output.
     steps:
