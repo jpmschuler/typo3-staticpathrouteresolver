@@ -53,7 +53,11 @@ class StaticPathRouteResolver implements MiddlewareInterface
                     try {
                         [$content, $contentType] = $this->resolve($request, $site, $routeConfig);
                     } catch (InvalidRouteArgumentsException $e) {
-                        return new Response('Invalid route', 404, ['Content-Type' => 'text/plain']);
+                        return new Response(
+                            $e->getMessage() . ': ' . $e->getCode(),
+                            404,
+                            ['Content-Type' => 'text/plain']
+                        );
                     }
 
                     return new HtmlResponse($content, 200, ['Content-Type' => $contentType]);
@@ -97,11 +101,14 @@ class StaticPathRouteResolver implements MiddlewareInterface
     /**
      * @param string $filenameWithExtPrefix
      * @return array{string|false,string|false}
-     * @throws Exception
+     * @throws Exception|InvalidRouteArgumentsException
      */
     protected function getFromFile(string $filenameWithExtPrefix): array
     {
         $file = ExtensionManagementUtility::resolvePackagePath($filenameWithExtPrefix);
+        if (!file_exists($file)) {
+            throw new InvalidRouteArgumentsException('Invalid Route configured', 1690962674171);
+        }
         $content = file_get_contents($file);
         $fileInfo = new FileInfo($file);
         $contentType = $fileInfo->getMimeType();
@@ -114,7 +121,7 @@ class StaticPathRouteResolver implements MiddlewareInterface
      * @param Site $site
      * @param array{path: string} $routeConfig
      * @return array{string|false,string|false}
-     * @throws Exception
+     * @throws Exception|InvalidRouteArgumentsException
      */
     protected function resolve(ServerRequestInterface $request, Site $site, array $routeConfig): array
     {
