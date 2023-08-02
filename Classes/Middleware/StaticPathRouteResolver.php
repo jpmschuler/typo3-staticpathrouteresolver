@@ -12,6 +12,7 @@ use TYPO3\CMS\Core\Http\HtmlResponse;
 use TYPO3\CMS\Core\Http\RequestFactory;
 use TYPO3\CMS\Core\Http\Response;
 use TYPO3\CMS\Core\LinkHandling\LinkService;
+use TYPO3\CMS\Core\Package\Exception;
 use TYPO3\CMS\Core\Routing\InvalidRouteArgumentsException;
 use TYPO3\CMS\Core\Site\Entity\Site;
 use TYPO3\CMS\Core\Type\File\FileInfo;
@@ -67,10 +68,10 @@ class StaticPathRouteResolver implements MiddlewareInterface
      * - needs to have a valid "route" property
      * - needs to have a "path"
      *
-     * @param array $staticRouteConfiguration the "routes" part of the site configuration
+     * @param array<mixed> $staticRouteConfiguration the "routes" part of the site configuration
      * @param Site $site the current site where the configuration is based on
      * @param string $uriPath the path of the current request - used to match the "route" value of a single static route
-     * @return array|null the configuration for the static route that matches, or null if no route is given
+     * @return array{path: string}|null the configuration for the static route that matches, or null if no route
      */
     protected function getApplicableStaticRoute(array $staticRouteConfiguration, Site $site, string $uriPath): ?array
     {
@@ -93,6 +94,11 @@ class StaticPathRouteResolver implements MiddlewareInterface
         return null;
     }
 
+    /**
+     * @param string $filenameWithExtPrefix
+     * @return array{string|false,string|false}
+     * @throws Exception
+     */
     protected function getFromFile(string $filenameWithExtPrefix): array
     {
         $file = ExtensionManagementUtility::resolvePackagePath($filenameWithExtPrefix);
@@ -104,7 +110,11 @@ class StaticPathRouteResolver implements MiddlewareInterface
     }
 
     /**
-     * @throws InvalidRouteArgumentsException
+     * @param ServerRequestInterface $request
+     * @param Site $site
+     * @param array{path: string} $routeConfig
+     * @return array{string|false,string|false}
+     * @throws Exception
      */
     protected function resolve(ServerRequestInterface $request, Site $site, array $routeConfig): array
     {
