@@ -94,9 +94,9 @@
 		"lint:phpcs": "@lint:phpcbf",
 		"lint:phpcs:dry-run": "phpcs Classes",
 		"lint:phpcs:dry-run:onlyerrors": "phpcs -n Classes",
-		"lint:phpstan": "phpstan --level=6 --memory-limit=1G analyse",
-		"lint:phpstan:baseline": "phpstan --level=6 --memory-limit=1G analyse --generate-baseline",
-		"lint:phpstan:ci": "phpstan --level=6 --memory-limit=1G --no-progress analyse",
+		"lint:phpstan": "phpstan --level=7 --memory-limit=1G analyse",
+		"lint:phpstan:baseline": "phpstan --level=7 --memory-limit=1G analyse --generate-baseline",
+		"lint:phpstan:ci": "phpstan --level=7 --memory-limit=1G --no-progress analyse",
 		"lint:typoscript": "typoscript-lint",
 		"post-update": "@post-install",
 		"prepare-release": [

@@ -100,7 +100,7 @@ class StaticPathRouteResolver implements MiddlewareInterface
 
     /**
      * @param string $filenameWithExtPrefix
-     * @return array{string|false,string|false}
+     * @return array{string,string|false}
      * @throws Exception|InvalidRouteArgumentsException
      */
     protected function getFromFile(string $filenameWithExtPrefix): array
@@ -109,7 +109,7 @@ class StaticPathRouteResolver implements MiddlewareInterface
         if (!file_exists($file)) {
             throw new InvalidRouteArgumentsException('Invalid Route configured', 1690962674171);
         }
-        $content = file_get_contents($file);
+        $content = file_get_contents($file) ?: '';
         $fileInfo = new FileInfo($file);
         $contentType = $fileInfo->getMimeType();
 
@@ -120,7 +120,7 @@ class StaticPathRouteResolver implements MiddlewareInterface
      * @param ServerRequestInterface $request
      * @param Site $site
      * @param array{path: string} $routeConfig
-     * @return array{string|false,string|false}
+     * @return array{string,string|false}
      * @throws Exception|InvalidRouteArgumentsException
      */
     protected function resolve(ServerRequestInterface $request, Site $site, array $routeConfig): array
