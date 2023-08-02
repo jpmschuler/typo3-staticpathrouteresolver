@@ -43,21 +43,20 @@ class StaticPathRouteResolver implements MiddlewareInterface
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $site = $request->getAttribute('site', null);
-        $configuration = $site->getConfiguration()['routes'] ?? null;
-        if (
-            $site instanceof Site
-            && ($configuration)
-        ) {
-            $path = ltrim($request->getUri()->getPath(), '/');
-            $routeConfig = $this->getApplicableStaticRoute($configuration, $site, $path);
-            if (is_array($routeConfig)) {
-                try {
-                    [$content, $contentType] = $this->resolve($request, $site, $routeConfig);
-                } catch (InvalidRouteArgumentsException $e) {
-                    return new Response('Invalid route', 404, ['Content-Type' => 'text/plain']);
-                }
+        if ($site instanceof Site) {
+            $configuration = $site->getConfiguration()['routes'] ?? null;
+            if ($configuration) {
+                $path = ltrim($request->getUri()->getPath(), '/');
+                $routeConfig = $this->getApplicableStaticRoute($configuration, $site, $path);
+                if (is_array($routeConfig)) {
+                    try {
+                        [$content, $contentType] = $this->resolve($request, $site, $routeConfig);
+                    } catch (InvalidRouteArgumentsException $e) {
+                        return new Response('Invalid route', 404, ['Content-Type' => 'text/plain']);
+                    }
 
-                return new HtmlResponse($content, 200, ['Content-Type' => $contentType]);
+                    return new HtmlResponse($content, 200, ['Content-Type' => $contentType]);
+                }
             }
         }
         return $handler->handle($request);
