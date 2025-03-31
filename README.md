@@ -7,6 +7,11 @@
 ![Supported PHP versions](https://shields.io/packagist/php-v/jpmschuler/staticpathrouteresolver?logo=php)
 [![Current CI health](https://github.com/jpmschuler/typo3-staticpathrouteresolver/actions/workflows/ci.yml/badge.svg)](https://github.com/jpmschuler/typo3-staticpathrouteresolver/actions/workflows/ci.yml)
 
+# Deprecated: part of core since TYPO3 13
+There is a core feature now doing the same, with slightly different syntax:
+
+https://docs.typo3.org/c/typo3/cms-core/main/en-us/Changelog/13.3/Feature-101472-AllowStaticRoutesToAssets.html
+
 # EXT:staticpathrouteresolver
 Site config static routes which support EXT: path prefix to e.g. allow per-site redirect of `/favicon.ico` or `/robots.txt` with
 * TYPO3 11LTS using `typo3/cms-composer-installers` `v4.0.0RC1` or with
